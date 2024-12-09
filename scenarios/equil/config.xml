@@ -12,32 +12,94 @@
 	</module>
 
 	<module name="plans">
-		<param name="inputPlansFile" value="scenarios/equil/output/synthetic_population.xml"  />
+		<param name="inputPlansFile" value="/Users/adrian/IdeaProjects/matsim-example-project/scenarios/equil/output/synthetic_population.xml"  />
 	</module>
 
 	<module name="controller">
 		<param name="outputDirectory" value="./scenarios/equil/output/run_results" />
 		<param name="firstIteration" value="0" />
-		<param name="lastIteration" value="10" />
+		<param name="lastIteration" value="1" />
 	</module>
 
 	<module name="qsim">
 		<param name="startTime" value="00:00:00" />
 		<param name="endTime" value="24:00:00" /> <!-- Simulate for a full day -->
 		<param name="snapshotperiod" value="00:30:00" /> <!-- Take snapshots every 30 minutes -->
-		<param name="flowCapacityFactor" value="0.1" /> <!-- Downscale capacity if using a smaller population -->
-		<param name="storageCapacityFactor" value="0.1" /> <!-- Downscale storage similarly -->
+		<param name="flowCapacityFactor" value="0.8" /> <!-- Downscale capacity if using a smaller population -->
+		<param name="storageCapacityFactor" value="1" /> <!-- Downscale storage similarly -->
+		<param name="usePersonIdForMissingVehicleId" value="false" />
+		<param name="useLanes" value="true" />
 	</module>
 
 
 	<module name="scoring">
 		<param name="learningRate" value="1.0" />
 		<param name="brainExpBeta" value="2.0" />
-
+		<param name="marginalUtilityOfMoney" value="0.01" />
 		<param name="lateArrival" value="-18" />
 		<param name="earlyDeparture" value="-0" />
 		<param name="performing" value="+6" />
 		<param name="waiting" value="-0" />
+
+		<parameterset type="modeParams" >
+			<!-- [utils] alternative-specific constant. Normally per trip, but that is probably buggy for multi-leg trips. -->
+			<param name="constant" value="0.0" />
+			<!-- [unit_of_money/day] Fixed cost of mode, per day. -->
+			<param name="dailyMonetaryConstant" value="1.0" />
+			<param name="dailyUtilityConstant" value="0" />
+			<param name="marginalUtilityOfDistance_util_m" value="-0.02" />
+			<param name="marginalUtilityOfTraveling_util_hr" value="-6.0" />
+			<param name="mode" value="car" />
+			<param name="monetaryDistanceRate" value="-0.0001" />
+		</parameterset>
+
+		<parameterset type="modeParams" >
+			<param name="constant" value="0.0" />
+			<param name="dailyMonetaryConstant" value="0.0" />
+			<param name="dailyUtilityConstant" value="0.0" />
+			<param name="marginalUtilityOfDistance_util_m" value="-0.05" />
+			<param name="marginalUtilityOfTraveling_util_hr" value="-6.0" />
+			<param name="mode" value="walk" />
+			<param name="monetaryDistanceRate" value="-0.005" />
+		</parameterset>
+
+		<parameterset type="modeParams" >
+			<param name="constant" value="0.0" />
+			<param name="dailyMonetaryConstant" value="0.0" />
+			<param name="dailyUtilityConstant" value="0.0" />
+			<param name="marginalUtilityOfDistance_util_m" value="-0.025" />
+			<param name="marginalUtilityOfTraveling_util_hr" value="-3.0" />
+			<param name="mode" value="bike" />
+			<param name="monetaryDistanceRate" value="0.0015" />
+		</parameterset>
+
+		<parameterset type="modeParams" >
+			<param name="constant" value="0.0" />
+			<param name="dailyMonetaryConstant" value="2.0" />
+			<param name="dailyUtilityConstant" value="0.0" />
+			<param name="marginalUtilityOfDistance_util_m" value="-0.0025" />
+			<param name="marginalUtilityOfTraveling_util_hr" value="-6.0" />
+			<param name="mode" value="ride" />
+			<param name="monetaryDistanceRate" value="-0.0001" />
+		</parameterset>
+
+		<parameterset type="modeParams">
+			<param name="mode" value="pt" />
+			<param name="marginalUtilityOfTraveling_util_hr" value="-4.0" />
+			<param name="marginalUtilityOfDistance_util_m" value="-0.0025" />
+			<param name="monetaryDistanceRate" value="-0.0001" />
+		</parameterset>
+
+		<parameterset type="modeParams" >
+			<param name="constant" value="0.0" />
+			<param name="dailyMonetaryConstant" value="1.0" />
+			<param name="dailyUtilityConstant" value="0" />
+			<param name="marginalUtilityOfDistance_util_m" value="-0.02" />
+			<param name="marginalUtilityOfTraveling_util_hr" value="-2.0" />
+			<param name="mode" value="other" />
+			<param name="monetaryDistanceRate" value="-0.0001" />
+		</parameterset>
+
 		<parameterset type="activityParams" >
 			<param name="activityType"            value="home" /> <!-- home -->
 			<param name="priority"        value="1" />
@@ -56,7 +118,7 @@
 
 	<module name="replanning">
 		<param name="maxAgentPlanMemorySize" value="5" /> <!-- 0 means unlimited -->
-
+		<param name="planSelectorForRemoval" value="WorstPlanForRemovalSelectorWithConflicts" />
 		<parameterset type="strategysettings">
 			<param name="strategyName" value="BestScore" />
 			<param name="weight" value="0.9" />
@@ -65,6 +127,7 @@
 			<param name="strategyName" value="ReRoute" />
 			<param name="weight" value="0.1" />
 		</parameterset>
+
 	</module>
 
 </config>

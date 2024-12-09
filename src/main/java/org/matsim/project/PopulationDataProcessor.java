@@ -2,6 +2,7 @@ package org.matsim.project;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
+import org.apache.commons.csv.CSVParser;
 
 import java.io.FileReader;
 import java.io.Reader;
@@ -19,21 +20,26 @@ public class PopulationDataProcessor {
     public static void processPopulationData(String csvFilePath, Map<String, DistrictData> districtDataMap) throws Exception {
         // Open the CSV file
         try (Reader reader = new FileReader(csvFilePath)) {
-            Iterable<CSVRecord> records = CSVFormat.DEFAULT
-                    .withHeader("tract_name", "population")
-                    .withFirstRecordAsHeader()
+            CSVParser parser = CSVFormat.DEFAULT
+                    .builder()
+                    .setHeader("tract_name", "population")
+                    .setSkipHeaderRecord(true)
+                    .build()
                     .parse(reader);
 
             // Parse and merge the data
-            for (CSVRecord record : records) {
+            for (CSVRecord record : parser) {
                 String tractId = record.get("tract_name");
-                int population = Integer.parseInt(record.get("population"));
-
-                DistrictData districtData = districtDataMap.get(tractId);
-                if (districtData != null) {
-                    districtData.setPopulation((long) population);
-                } else {
-                    System.err.println("Warning: Tract ID " + tractId + " not found in district data.");
+                try {
+                    int population = Integer.parseInt(record.get("population").trim());
+                    DistrictData districtData = districtDataMap.get(tractId);
+                    if (districtData != null) {
+                        districtData.setPopulation((long) population);
+                    } else {
+                        System.err.println("Warning: Tract ID " + tractId + " not found in district data.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.err.println("Invalid population value for tract " + tractId + ": " + record.get("population"));
                 }
             }
         }

@@ -27,7 +27,7 @@ public class RunMatsim {
         String shapefilePath = "/Users/adrian/IdeaProjects/matsim-example-project/original-input-data/neighborhoods_and_tracts.shp";
         String csvFilePath = "/Users/adrian/IdeaProjects/matsim-example-project/original-input-data/pop_by_tract.csv";
 
-        String populationFilePath = "scenarios/equil/output/synthetic_population.xml";
+        String populationFilePath = "/Users/adrian/IdeaProjects/matsim-example-project/scenarios/equil/output/synthetic_population.xml";
         File populationFile = new File(populationFilePath);
         if (!populationFile.exists()) {
             System.out.println("Synthetic population file not found. Generating new synthetic population...");
@@ -52,7 +52,7 @@ public class RunMatsim {
             System.out.println("Synthetic population file found: " + populationFilePath);
         }
         // Update config with new plans file
-        config.plans().setInputFile(populationFilePath);
+        // config.plans().setInputFile(populationFilePath);
 
         // Reload scenario with updated plans file
         Scenario scenario = ScenarioUtils.loadScenario(config);
