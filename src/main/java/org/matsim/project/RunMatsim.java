@@ -1,21 +1,3 @@
-/* *********************************************************************** *
- * project: org.matsim.*												   *
- *                                                                         *
- * *********************************************************************** *
- *                                                                         *
- * copyright       : (C) 2008 by the members listed in the COPYING,        *
- *                   LICENSE and WARRANTY file.                            *
- * email           : info at matsim dot org                                *
- *                                                                         *
- * *********************************************************************** *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *   See also COPYING, LICENSE and WARRANTY file                           *
- *                                                                         *
- * *********************************************************************** */
 package org.matsim.project;
 
 import org.matsim.api.core.v01.Scenario;
@@ -23,46 +5,64 @@ import org.matsim.core.config.Config;
 import org.matsim.core.config.ConfigUtils;
 import org.matsim.core.controler.Controler;
 import org.matsim.core.controler.OutputDirectoryHierarchy.OverwriteFileSetting;
+import org.matsim.core.population.io.PopulationWriter;
 import org.matsim.core.scenario.ScenarioUtils;
 
-/**
- * @author nagel
- *
- */
-public class RunMatsim{
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Map;
 
-	public static void main(String[] args) {
+public class RunMatsim {
+    public static void main(String[] args) throws Exception {
+        // Load MATSim config
+        Config config = ConfigUtils.loadConfig("scenarios/equil/config.xml");
 
-		Config config;
-		if ( args==null || args.length==0 || args[0]==null ){
-			config = ConfigUtils.loadConfig( "scenarios/equil/config.xml" );
-		} else {
-			config = ConfigUtils.loadConfig( args );
-		}
+        // Set up unique output directory
+        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String uniqueOutputDir = "scenarios/equil/output/run_" + timestamp;
+        config.controller().setOutputDirectory(uniqueOutputDir);
+        config.controller().setOverwriteFileSetting(OverwriteFileSetting.deleteDirectoryIfExists);
 
-		config.controller().setOverwriteFileSetting( OverwriteFileSetting.deleteDirectoryIfExists );
+        String shapefilePath = "/Users/adrian/IdeaProjects/matsim-example-project/original-input-data/neighborhoods_and_tracts.shp";
+        String csvFilePath = "/Users/adrian/IdeaProjects/matsim-example-project/original-input-data/pop_by_tract.csv";
 
-		// possibly modify config here
+        String populationFilePath = "scenarios/equil/output/synthetic_population.xml";
+        File populationFile = new File(populationFilePath);
+        if (!populationFile.exists()) {
+            System.out.println("Synthetic population file not found. Generating new synthetic population...");
 
-		// ---
-		
-		Scenario scenario = ScenarioUtils.loadScenario(config) ;
+            // create temp scenario
+            Scenario scenario = ScenarioUtils.createScenario(config);
 
-		// possibly modify scenario here
-		
-		// ---
-		
-		Controler controler = new Controler( scenario ) ;
-		
-		// possibly modify controler here
+            // Debug network
+            System.out.println("Network file: " + config.network().getInputFile());
 
-//		controler.addOverridingModule( new OTFVisLiveModule() ) ;
 
-//		controler.addOverridingModule( new SimWrapperModule() );
-		
-		// ---
-		
-		controler.run();
-	}
-	
+            // Process population data and generate the synthetic population
+            Map<String, DistrictData> districtDataMap = ShapefileProcessor.loadDistrictData(shapefilePath);
+            PopulationDataProcessor.processPopulationData(csvFilePath, districtDataMap);
+            GeneratePopulation.createPopulation(scenario, districtDataMap);
+
+            // Write synthetic population to file
+
+            new PopulationWriter(scenario.getPopulation()).write(populationFilePath);
+            System.out.println("Synthetic population written to: " + populationFilePath);
+        } else {
+            System.out.println("Synthetic population file found: " + populationFilePath);
+        }
+        // Update config with new plans file
+        config.plans().setInputFile(populationFilePath);
+
+        // Reload scenario with updated plans file
+        Scenario scenario = ScenarioUtils.loadScenario(config);
+
+        // Verify scenario has population loaded
+        System.out.println("Scenario now has population: " + scenario.getPopulation().getPersons().size());
+        System.out.println("Loaded network nodes: " + scenario.getNetwork().getNodes().size());
+        System.out.println("Loaded network links: " + scenario.getNetwork().getLinks().size());
+        // Run the simulation
+        Controler controler = new Controler(scenario);
+        controler.run();
+    }
 }
