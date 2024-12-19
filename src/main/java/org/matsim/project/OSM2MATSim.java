@@ -30,7 +30,7 @@ public class OSM2MATSim {
 
         SupersonicOsmNetworkReader reader = new SupersonicOsmNetworkReader.Builder()
                 .setCoordinateTransformation(transformation)
-                .setIncludeLinkAtCoordWithHierarchy((coord, hierarchyLevel) -> hierarchyLevel <= LinkProperties.LEVEL_PRIMARY
+                .setIncludeLinkAtCoordWithHierarchy((coord, hierarchyLevel) -> hierarchyLevel <= LinkProperties.LEVEL_RESIDENTIAL
                         || ShpGeometryUtils.isCoordInPreparedGeometries(coord, filterGeometries))
                 .setAfterLinkCreated((link, osmTags, direction) -> {
                     Set<String> modes = new HashSet<>(link.getAllowedModes());
@@ -39,6 +39,42 @@ public class OSM2MATSim {
                         modes.add(TransportMode.bike);
                     }
                     link.setAllowedModes(modes);
+                    
+                    // Increase capacity and number of lanes
+                    double originalCapacity = link.getCapacity();
+                    double originalNumberOfLanes = link.getNumberOfLanes();
+
+                    // Custom scaling factor for capacity and lanes
+                    double scalingFactor = 2.5;
+
+                    link.setCapacity(originalCapacity * scalingFactor);
+
+                    double adjustedLanes = originalNumberOfLanes * scalingFactor;
+                    if (adjustedLanes < 2) {
+                        link.setNumberOfLanes(2); // Ensure minimum of 1 lane
+                    } else {
+                        link.setNumberOfLanes(Math.round(adjustedLanes)); // Round to nearest integer
+                    }
+
+                    // Optionally adjust the length
+
+                    double originalLength = link.getLength();
+                    if (originalLength < 100) {
+                        link.setLength(originalLength * 25); // Increase length by 2500%
+                    } else {
+                        link.setLength(originalLength * 8.5); // Increase length by 850%
+                    }
+
+
+                    // Calculate storage capacity
+                    double storageCapacity = (link.getLength() * link.getNumberOfLanes()) / 7.5;
+
+                    // Ensure that the capacity does not exceed storage capacity
+                    double adjustedCapacity = Math.min(link.getCapacity(), storageCapacity);
+                    link.setCapacity(adjustedCapacity);
+
+                    System.out.println("Link ID: " + link.getId() + " | Length: " + link.getLength() +
+                                    " | Storage Capacity: " + storageCapacity + " | Adjusted Capacity: " + adjustedCapacity);
                 })
                 .build();
 
