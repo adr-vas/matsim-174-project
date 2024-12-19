@@ -1,0 +1,36 @@
+2024-12-19T02:27:56,897  WARN ConfigConsistencyCheckerImpl:167 Using lanes without enabling linktolinkrouting might not lead to expected simulation results
+2024-12-19T02:27:57,125 ERROR PrepareForSimImpl:396 Found a trip with multiple legs and no routingMode. Person id 101.01_1081
+Trip: [leg [mode=car][depTime=08:35:52][travTime=undefined][arrTime=undefined][route= startLinkId=7065342400000f endLinkId=4172759070000f travTime=-Infinity dist=NaN], leg [mode=car][depTime=17:26:30][travTime=undefined][arrTime=undefined][route= startLinkId=4172759070000f endLinkId=7065342400000f travTime=-Infinity dist=NaN]]
+Terminating. Take care to inject an adequate MainModeIdentifier and set config switch plansConfigGroup.setHandlingOfPlansWithoutRoutingMode(useMainModeIdentifier).
+2024-12-19T02:27:57,126 ERROR MatsimRuntimeModifications:76 Getting uncaught Exception in Thread main
+java.lang.RuntimeException: Found a trip with multiple legs and no routingMode. Person id 101.01_1081
+Trip: [leg [mode=car][depTime=08:35:52][travTime=undefined][arrTime=undefined][route= startLinkId=7065342400000f endLinkId=4172759070000f travTime=-Infinity dist=NaN], leg [mode=car][depTime=17:26:30][travTime=undefined][arrTime=undefined][route= startLinkId=4172759070000f endLinkId=7065342400000f travTime=-Infinity dist=NaN]]
+Terminating. Take care to inject an adequate MainModeIdentifier and set config switch plansConfigGroup.setHandlingOfPlansWithoutRoutingMode(useMainModeIdentifier).
+	at org.matsim.core.controler.PrepareForSimImpl.adaptOutdatedPlansForRoutingMode(PrepareForSimImpl.java:397) ~[matsim-2024.0.jar:?]
+	at org.matsim.core.controler.PrepareForSimImpl.run(PrepareForSimImpl.java:179) ~[matsim-2024.0.jar:?]
+	at org.matsim.core.controler.NewControler.prepareForSim(NewControler.java:114) ~[matsim-2024.0.jar:?]
+	at org.matsim.core.controler.AbstractController$1.run(AbstractController.java:83) ~[matsim-2024.0.jar:?]
+	at org.matsim.core.controler.MatsimRuntimeModifications.run(MatsimRuntimeModifications.java:70) [matsim-2024.0.jar:?]
+	at org.matsim.core.controler.MatsimRuntimeModifications.run(MatsimRuntimeModifications.java:53) [matsim-2024.0.jar:?]
+	at org.matsim.core.controler.AbstractController.run(AbstractController.java:92) [matsim-2024.0.jar:?]
+	at org.matsim.core.controler.NewControler.run(NewControler.java:83) [matsim-2024.0.jar:?]
+	at org.matsim.core.controler.Controler.run(Controler.java:259) [matsim-2024.0.jar:?]
+	at org.matsim.project.RunMatsim.main(RunMatsim.java:42) [classes/:?]
+2024-12-19T02:27:57,134 ERROR MatsimRuntimeModifications:82 ERROR --- This is an unexpected shutdown!
+2024-12-19T02:27:57,134 ERROR MatsimRuntimeModifications:85 Shutdown possibly caused by the following Exception:
+java.lang.RuntimeException: Found a trip with multiple legs and no routingMode. Person id 101.01_1081
+Trip: [leg [mode=car][depTime=08:35:52][travTime=undefined][arrTime=undefined][route= startLinkId=7065342400000f endLinkId=4172759070000f travTime=-Infinity dist=NaN], leg [mode=car][depTime=17:26:30][travTime=undefined][arrTime=undefined][route= startLinkId=4172759070000f endLinkId=7065342400000f travTime=-Infinity dist=NaN]]
+Terminating. Take care to inject an adequate MainModeIdentifier and set config switch plansConfigGroup.setHandlingOfPlansWithoutRoutingMode(useMainModeIdentifier).
+	at org.matsim.core.controler.PrepareForSimImpl.adaptOutdatedPlansForRoutingMode(PrepareForSimImpl.java:397) ~[matsim-2024.0.jar:?]
+	at org.matsim.core.controler.PrepareForSimImpl.run(PrepareForSimImpl.java:179) ~[matsim-2024.0.jar:?]
+	at org.matsim.core.controler.NewControler.prepareForSim(NewControler.java:114) ~[matsim-2024.0.jar:?]
+	at org.matsim.core.controler.AbstractController$1.run(AbstractController.java:83) ~[matsim-2024.0.jar:?]
+	at org.matsim.core.controler.MatsimRuntimeModifications.run(MatsimRuntimeModifications.java:70) [matsim-2024.0.jar:?]
+	at org.matsim.core.controler.MatsimRuntimeModifications.run(MatsimRuntimeModifications.java:53) [matsim-2024.0.jar:?]
+	at org.matsim.core.controler.AbstractController.run(AbstractController.java:92) [matsim-2024.0.jar:?]
+	at org.matsim.core.controler.NewControler.run(NewControler.java:83) [matsim-2024.0.jar:?]
+	at org.matsim.core.controler.Controler.run(Controler.java:259) [matsim-2024.0.jar:?]
+	at org.matsim.project.RunMatsim.main(RunMatsim.java:42) [classes/:?]
+2024-12-19T02:27:58,013 ERROR MatsimRuntimeModifications:100 ERROR --- MATSim unexpectedly terminated. Please check the output or the logfile with warnings and errors for hints.
+2024-12-19T02:27:58,013 ERROR MatsimRuntimeModifications:101 ERROR --- results should not be used for further analysis.
+2024-12-19T02:27:58,013 ERROR MatsimRuntimeModifications:105 ERROR --- This was an unexpected shutdown! See the log file for a possible reason.

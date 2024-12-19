@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE config SYSTEM "http://www.matsim.org/files/dtd/config_v2.dtd">
+<config>
+	<module name="controller" >
+		<!-- Default=1000. Last Iteration of a simulation. -->
+		<param name="lastIteration" value="1" />
+		<param name="outputDirectory" value="scenarios/equil/output/run_20241218_051102" />
+		<!-- Possible values: failIfDirectoryExists,overwriteExistingFiles,deleteDirectoryIfExists -->
+		<param name="overwriteFiles" value="deleteDirectoryIfExists" />
+	</module>
+	<module name="global" >
+		<param name="coordinateSystem" value="EPSG:4326" />
+	</module>
+	<module name="network" >
+		<param name="inputNetworkFile" value="output/sf_network.xml.gz" />
+	</module>
+	<module name="plans" >
+		<param name="inputPlansFile" value="output/synthetic_population.xml" />
+	</module>
+	<module name="qsim" >
+		<param name="endTime" value="24:00:00" />
+		<param name="flowCapacityFactor" value="0.8" />
+		<param name="snapshotperiod" value="00:30:00" />
+		<param name="startTime" value="00:00:00" />
+		<!-- Set this parameter to true if lanes should be used, false if not. -->
+		<param name="useLanes" value="true" />
+		<!-- If a route does not reference a vehicle, agents will use the vehicle with the same id as their own. -->
+		<param name="usePersonIdForMissingVehicleId" value="false" />
+	</module>
+	<module name="replanning" >
+		<!-- strategyName of PlanSelector for plans removal.  Possible defaults: WorstPlanSelector SelectRandom SelectExpBetaForRemoval ChangeExpBetaForRemoval PathSizeLogitSelectorForRemoval . The current default, WorstPlanSelector is not a good choice from a discrete choice theoretical perspective. Alternatives, however, have not been systematically tested. kai, feb'12 -->
+		<param name="planSelectorForRemoval" value="WorstPlanForRemovalSelectorWithConflicts" />
+		<parameterset type="strategysettings" >
+			<!-- strategyName of strategy.  Possible default names: SelectRandom BestScore KeepLastSelected ChangeExpBeta SelectExpBeta SelectPathSizeLogit      (selectors), ReRouteTimeAllocationMutatorTimeAllocationMutator_ReRouteChangeSingleTripModeChangeTripModeSubtourModeChoice (innovative strategies). -->
+			<param name="strategyName" value="BestScore" />
+			<!-- weight of a strategy: for each agent, a strategy will be selected with a probability proportional to its weight -->
+			<param name="weight" value="0.9" />
+		</parameterset>
+		<parameterset type="strategysettings" >
+			<param name="strategyName" value="ReRoute" />
+			<param name="weight" value="0.1" />
+		</parameterset>
+	</module>
+	<module name="routing" >
+		<parameterset type="teleportedModeParameters" >
+			<param name="mode" value="bike" />
+		</parameterset>
+		<parameterset type="teleportedModeParameters" >
+			<param name="mode" value="walk" />
+		</parameterset>
+		<parameterset type="teleportedModeParameters" >
+			<param name="mode" value="non_network_walk" />
+		</parameterset>
+		<parameterset type="teleportedModeParameters" >
+			<param name="mode" value="ride" />
+		</parameterset>
+		<parameterset type="teleportedModeParameters" >
+			<param name="mode" value="pt" />
+		</parameterset>
+	</module>
+	<module name="scoring" >
+		<!-- logit model scale parameter. default: 1.  Has name and default value for historical reasons (see Bryan Raney's phd thesis). -->
+		<param name="brainExpBeta" value="2.0" />
+		<parameterset type="scoringParameters" >
+			<param name="marginalUtilityOfMoney" value="0.01" />
+			<param name="waitingPt" value="-4.0" />
+			<parameterset type="activityParams" >
+				<param name="activityType" value="dummy" />
+				<!-- typical duration of activity.  needs to be defined and non-zero.  in sec. -->
+				<param name="typicalDuration" value="02:00:00" />
+			</parameterset>
+			<parameterset type="activityParams" >
+				<param name="activityType" value="car interaction" />
+				<param name="typicalDuration" value="undefined" />
+			</parameterset>
+			<parameterset type="activityParams" >
+				<param name="activityType" value="pt interaction" />
+				<param name="typicalDuration" value="undefined" />
+			</parameterset>
+			<parameterset type="activityParams" >
+				<param name="activityType" value="bike interaction" />
+				<param name="typicalDuration" value="undefined" />
+			</parameterset>
+			<parameterset type="activityParams" >
+				<param name="activityType" value="drt interaction" />
+				<param name="typicalDuration" value="undefined" />
+			</parameterset>
+			<parameterset type="activityParams" >
+				<param name="activityType" value="taxi interaction" />
+				<param name="typicalDuration" value="undefined" />
+			</parameterset>
+			<parameterset type="activityParams" >
+				<param name="activityType" value="other interaction" />
+				<param name="typicalDuration" value="undefined" />
+			</parameterset>
+			<parameterset type="activityParams" >
+				<param name="activityType" value="walk interaction" />
+				<param name="typicalDuration" value="undefined" />
+			</parameterset>
+			<parameterset type="activityParams" >
+				<param name="activityType" value="home" />
+				<param name="typicalDuration" value="12:00:00" />
+			</parameterset>
+			<parameterset type="activityParams" >
+				<param name="activityType" value="work" />
+				<param name="closingTime" value="18:00:00" />
+				<param name="latestStartTime" value="09:00:00" />
+				<param name="openingTime" value="07:00:00" />
+				<param name="typicalDuration" value="08:00:00" />
+			</parameterset>
+			<parameterset type="activityParams" >
+				<param name="activityType" value="ride interaction" />
+				<param name="scoringThisActivityAtAll" value="false" />
+				<param name="typicalDuration" value="undefined" />
+			</parameterset>
+			<parameterset type="modeParams" >
+				<!-- [unit_of_money/day] Fixed cost of mode, per day. -->
+				<param name="dailyMonetaryConstant" value="1.0" />
+				<!-- [utils/m] utility of traveling (e.g. walking or driving) per m, normally negative.  this is on top of the time (dis)utility. -->
+				<param name="marginalUtilityOfDistance_util_m" value="-0.02" />
+				<param name="mode" value="car" />
+				<!-- [unit_of_money/m] conversion of distance into money. Normally negative. -->
+				<param name="monetaryDistanceRate" value="-1.0E-4" />
+			</parameterset>
+			<parameterset type="modeParams" >
+				<param name="marginalUtilityOfDistance_util_m" value="-0.05" />
+				<param name="mode" value="walk" />
+				<param name="monetaryDistanceRate" value="-0.005" />
+			</parameterset>
+			<parameterset type="modeParams" >
+				<param name="marginalUtilityOfDistance_util_m" value="-0.025" />
+				<!-- [utils/hr] additional marginal utility of traveling.  normally negative.  this comes on top of the opportunity cost of time -->
+				<param name="marginalUtilityOfTraveling_util_hr" value="-3.0" />
+				<param name="mode" value="bike" />
+				<param name="monetaryDistanceRate" value="0.0015" />
+			</parameterset>
+			<parameterset type="modeParams" >
+				<param name="dailyMonetaryConstant" value="2.0" />
+				<param name="marginalUtilityOfDistance_util_m" value="-0.0025" />
+				<param name="mode" value="ride" />
+				<param name="monetaryDistanceRate" value="-1.0E-4" />
+			</parameterset>
+			<parameterset type="modeParams" >
+				<param name="marginalUtilityOfDistance_util_m" value="-0.0025" />
+				<param name="marginalUtilityOfTraveling_util_hr" value="-4.0" />
+				<param name="mode" value="pt" />
+				<param name="monetaryDistanceRate" value="-1.0E-4" />
+			</parameterset>
+			<parameterset type="modeParams" >
+				<param name="dailyMonetaryConstant" value="1.0" />
+				<param name="marginalUtilityOfDistance_util_m" value="-0.02" />
+				<param name="marginalUtilityOfTraveling_util_hr" value="-2.0" />
+				<param name="mode" value="other" />
+				<param name="monetaryDistanceRate" value="-1.0E-4" />
+			</parameterset>
+		</parameterset>
+	</module>
+
+</config>

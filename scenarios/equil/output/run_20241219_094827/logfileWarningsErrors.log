@@ -1,0 +1,3 @@
+2024-12-19T09:48:30,237  WARN ConfigConsistencyCheckerImpl:167 Using lanes without enabling linktolinkrouting might not lead to expected simulation results
+2024-12-19T09:50:02,658 ERROR BasicPlanAgentImpl:187 last activity of person driver agent id car_330.01_329.01_4811 has end time < infty; setting it to infty
+2024-12-19T09:50:02,658 ERROR BasicPlanAgentImpl:188  This message given only once.

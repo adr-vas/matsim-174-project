@@ -1,0 +1,210 @@
+2024-12-19T02:44:15,941  WARN ConfigConsistencyCheckerImpl:167 Using lanes without enabling linktolinkrouting might not lead to expected simulation results
+2024-12-19T02:44:16,264  WARN RandomizingTimeDistanceTravelDisutilityFactory:118 There will be no routing randomness. The randomization of the travel disutility requires the travel time cost rate to be different than zero. Continuing anyway.
+2024-12-19T02:44:16,734 ERROR AbstractController:225 Mobsim did not complete normally! afterMobsimListeners will be called anyway.
+com.google.inject.ProvisionException: Unable to provision, see the following errors:
+
+1) [Guice/BindingAlreadySet]: AgentFactory was bound multiple times.
+
+Bound at:
+1  : PopulationModule.provideAgentFactory(PopulationModule.java:48)
+      \_ installed by: QSimProvider$1 -> AbstractQSimModule$1 -> Modules$OverrideModule -> PopulationModule
+2  : PopulationModule.provideAgentFactory(PopulationModule.java:48)
+      \_ installed by: QSimProvider$1 -> AbstractQSimModule$1 -> Modules$OverrideModule -> PopulationModule
+
+Learn more:
+  https://github.com/google/guice/wiki/BINDING_ALREADY_SET
+
+2) [Guice/BindingAlreadySet]: QVehicleFactory was bound multiple times.
+
+Bound at:
+1  : PopulationModule.provideQVehicleFactory(PopulationModule.java:58)
+      \_ installed by: QSimProvider$1 -> AbstractQSimModule$1 -> Modules$OverrideModule -> PopulationModule
+2  : PopulationModule.provideQVehicleFactory(PopulationModule.java:58)
+      \_ installed by: QSimProvider$1 -> AbstractQSimModule$1 -> Modules$OverrideModule -> PopulationModule
+
+Learn more:
+  https://github.com/google/guice/wiki/BINDING_ALREADY_SET
+
+3) [Guice/BindingAlreadySet]: TransitStopAgentTracker was bound multiple times.
+
+Bound at:
+1  : TransitEngineModule.transitStopAgentTracker(TransitEngineModule.java:56)
+      \_ installed by: QSimProvider$1 -> AbstractQSimModule$1 -> Modules$OverrideModule -> TransitEngineModule
+2  : TransitEngineModule.transitStopAgentTracker(TransitEngineModule.java:56)
+      \_ installed by: QSimProvider$1 -> AbstractQSimModule$1 -> Modules$OverrideModule -> TransitEngineModule
+
+Learn more:
+  https://github.com/google/guice/wiki/BINDING_ALREADY_SET
+
+3 errors
+
+======================
+Full classname legend:
+======================
+AbstractQSimModule$1:    "org.matsim.core.mobsim.qsim.AbstractQSimModule$1"
+AgentFactory:            "org.matsim.core.mobsim.qsim.agents.AgentFactory"
+Modules$OverrideModule:  "com.google.inject.util.Modules$OverrideModule"
+PopulationModule:        "org.matsim.core.mobsim.qsim.PopulationModule"
+QSimProvider$1:          "org.matsim.core.mobsim.qsim.QSimProvider$1"
+QVehicleFactory:         "org.matsim.core.mobsim.qsim.qnetsimengine.QVehicleFactory"
+TransitEngineModule:     "org.matsim.core.mobsim.qsim.pt.TransitEngineModule"
+TransitStopAgentTracker: "org.matsim.core.mobsim.qsim.pt.TransitStopAgentTracker"
+========================
+End of classname legend:
+========================
+
+	at com.google.inject.internal.InternalProvisionException.toProvisionException(InternalProvisionException.java:251) ~[guice-7.0.0.jar:?]
+	at com.google.inject.internal.InjectorImpl$1.get(InjectorImpl.java:1151) ~[guice-7.0.0.jar:?]
+	at org.matsim.core.controler.NewControler.runMobSim(NewControler.java:125) ~[matsim-2024.0.jar:?]
+	at org.matsim.core.controler.AbstractController$8.run(AbstractController.java:214) ~[matsim-2024.0.jar:?]
+	at org.matsim.core.controler.AbstractController.iterationStep(AbstractController.java:246) ~[matsim-2024.0.jar:?]
+	at org.matsim.core.controler.AbstractController.mobsim(AbstractController.java:210) [matsim-2024.0.jar:?]
+	at org.matsim.core.controler.AbstractController.iteration(AbstractController.java:157) [matsim-2024.0.jar:?]
+	at org.matsim.core.controler.AbstractController.doIterations(AbstractController.java:124) [matsim-2024.0.jar:?]
+	at org.matsim.core.controler.AbstractController$1.run(AbstractController.java:84) [matsim-2024.0.jar:?]
+	at org.matsim.core.controler.MatsimRuntimeModifications.run(MatsimRuntimeModifications.java:70) [matsim-2024.0.jar:?]
+	at org.matsim.core.controler.MatsimRuntimeModifications.run(MatsimRuntimeModifications.java:53) [matsim-2024.0.jar:?]
+	at org.matsim.core.controler.AbstractController.run(AbstractController.java:92) [matsim-2024.0.jar:?]
+	at org.matsim.core.controler.NewControler.run(NewControler.java:83) [matsim-2024.0.jar:?]
+	at org.matsim.core.controler.Controler.run(Controler.java:259) [matsim-2024.0.jar:?]
+	at org.matsim.project.RunMatsim.main(RunMatsim.java:46) [classes/:?]
+2024-12-19T02:44:16,779 ERROR MatsimRuntimeModifications:76 Getting uncaught Exception in Thread main
+com.google.inject.ProvisionException: Unable to provision, see the following errors:
+
+1) [Guice/BindingAlreadySet]: AgentFactory was bound multiple times.
+
+Bound at:
+1  : PopulationModule.provideAgentFactory(PopulationModule.java:48)
+      \_ installed by: QSimProvider$1 -> AbstractQSimModule$1 -> Modules$OverrideModule -> PopulationModule
+2  : PopulationModule.provideAgentFactory(PopulationModule.java:48)
+      \_ installed by: QSimProvider$1 -> AbstractQSimModule$1 -> Modules$OverrideModule -> PopulationModule
+
+Learn more:
+  https://github.com/google/guice/wiki/BINDING_ALREADY_SET
+
+2) [Guice/BindingAlreadySet]: QVehicleFactory was bound multiple times.
+
+Bound at:
+1  : PopulationModule.provideQVehicleFactory(PopulationModule.java:58)
+      \_ installed by: QSimProvider$1 -> AbstractQSimModule$1 -> Modules$OverrideModule -> PopulationModule
+2  : PopulationModule.provideQVehicleFactory(PopulationModule.java:58)
+      \_ installed by: QSimProvider$1 -> AbstractQSimModule$1 -> Modules$OverrideModule -> PopulationModule
+
+Learn more:
+  https://github.com/google/guice/wiki/BINDING_ALREADY_SET
+
+3) [Guice/BindingAlreadySet]: TransitStopAgentTracker was bound multiple times.
+
+Bound at:
+1  : TransitEngineModule.transitStopAgentTracker(TransitEngineModule.java:56)
+      \_ installed by: QSimProvider$1 -> AbstractQSimModule$1 -> Modules$OverrideModule -> TransitEngineModule
+2  : TransitEngineModule.transitStopAgentTracker(TransitEngineModule.java:56)
+      \_ installed by: QSimProvider$1 -> AbstractQSimModule$1 -> Modules$OverrideModule -> TransitEngineModule
+
+Learn more:
+  https://github.com/google/guice/wiki/BINDING_ALREADY_SET
+
+3 errors
+
+======================
+Full classname legend:
+======================
+AbstractQSimModule$1:    "org.matsim.core.mobsim.qsim.AbstractQSimModule$1"
+AgentFactory:            "org.matsim.core.mobsim.qsim.agents.AgentFactory"
+Modules$OverrideModule:  "com.google.inject.util.Modules$OverrideModule"
+PopulationModule:        "org.matsim.core.mobsim.qsim.PopulationModule"
+QSimProvider$1:          "org.matsim.core.mobsim.qsim.QSimProvider$1"
+QVehicleFactory:         "org.matsim.core.mobsim.qsim.qnetsimengine.QVehicleFactory"
+TransitEngineModule:     "org.matsim.core.mobsim.qsim.pt.TransitEngineModule"
+TransitStopAgentTracker: "org.matsim.core.mobsim.qsim.pt.TransitStopAgentTracker"
+========================
+End of classname legend:
+========================
+
+	at com.google.inject.internal.InternalProvisionException.toProvisionException(InternalProvisionException.java:251) ~[guice-7.0.0.jar:?]
+	at com.google.inject.internal.InjectorImpl$1.get(InjectorImpl.java:1151) ~[guice-7.0.0.jar:?]
+	at org.matsim.core.controler.NewControler.runMobSim(NewControler.java:125) ~[matsim-2024.0.jar:?]
+	at org.matsim.core.controler.AbstractController$8.run(AbstractController.java:214) ~[matsim-2024.0.jar:?]
+	at org.matsim.core.controler.AbstractController.iterationStep(AbstractController.java:246) ~[matsim-2024.0.jar:?]
+	at org.matsim.core.controler.AbstractController.mobsim(AbstractController.java:210) ~[matsim-2024.0.jar:?]
+	at org.matsim.core.controler.AbstractController.iteration(AbstractController.java:157) ~[matsim-2024.0.jar:?]
+	at org.matsim.core.controler.AbstractController.doIterations(AbstractController.java:124) ~[matsim-2024.0.jar:?]
+	at org.matsim.core.controler.AbstractController$1.run(AbstractController.java:84) ~[matsim-2024.0.jar:?]
+	at org.matsim.core.controler.MatsimRuntimeModifications.run(MatsimRuntimeModifications.java:70) [matsim-2024.0.jar:?]
+	at org.matsim.core.controler.MatsimRuntimeModifications.run(MatsimRuntimeModifications.java:53) [matsim-2024.0.jar:?]
+	at org.matsim.core.controler.AbstractController.run(AbstractController.java:92) [matsim-2024.0.jar:?]
+	at org.matsim.core.controler.NewControler.run(NewControler.java:83) [matsim-2024.0.jar:?]
+	at org.matsim.core.controler.Controler.run(Controler.java:259) [matsim-2024.0.jar:?]
+	at org.matsim.project.RunMatsim.main(RunMatsim.java:46) [classes/:?]
+2024-12-19T02:44:16,784 ERROR MatsimRuntimeModifications:82 ERROR --- This is an unexpected shutdown!
+2024-12-19T02:44:16,784 ERROR MatsimRuntimeModifications:85 Shutdown possibly caused by the following Exception:
+com.google.inject.ProvisionException: Unable to provision, see the following errors:
+
+1) [Guice/BindingAlreadySet]: AgentFactory was bound multiple times.
+
+Bound at:
+1  : PopulationModule.provideAgentFactory(PopulationModule.java:48)
+      \_ installed by: QSimProvider$1 -> AbstractQSimModule$1 -> Modules$OverrideModule -> PopulationModule
+2  : PopulationModule.provideAgentFactory(PopulationModule.java:48)
+      \_ installed by: QSimProvider$1 -> AbstractQSimModule$1 -> Modules$OverrideModule -> PopulationModule
+
+Learn more:
+  https://github.com/google/guice/wiki/BINDING_ALREADY_SET
+
+2) [Guice/BindingAlreadySet]: QVehicleFactory was bound multiple times.
+
+Bound at:
+1  : PopulationModule.provideQVehicleFactory(PopulationModule.java:58)
+      \_ installed by: QSimProvider$1 -> AbstractQSimModule$1 -> Modules$OverrideModule -> PopulationModule
+2  : PopulationModule.provideQVehicleFactory(PopulationModule.java:58)
+      \_ installed by: QSimProvider$1 -> AbstractQSimModule$1 -> Modules$OverrideModule -> PopulationModule
+
+Learn more:
+  https://github.com/google/guice/wiki/BINDING_ALREADY_SET
+
+3) [Guice/BindingAlreadySet]: TransitStopAgentTracker was bound multiple times.
+
+Bound at:
+1  : TransitEngineModule.transitStopAgentTracker(TransitEngineModule.java:56)
+      \_ installed by: QSimProvider$1 -> AbstractQSimModule$1 -> Modules$OverrideModule -> TransitEngineModule
+2  : TransitEngineModule.transitStopAgentTracker(TransitEngineModule.java:56)
+      \_ installed by: QSimProvider$1 -> AbstractQSimModule$1 -> Modules$OverrideModule -> TransitEngineModule
+
+Learn more:
+  https://github.com/google/guice/wiki/BINDING_ALREADY_SET
+
+3 errors
+
+======================
+Full classname legend:
+======================
+AbstractQSimModule$1:    "org.matsim.core.mobsim.qsim.AbstractQSimModule$1"
+AgentFactory:            "org.matsim.core.mobsim.qsim.agents.AgentFactory"
+Modules$OverrideModule:  "com.google.inject.util.Modules$OverrideModule"
+PopulationModule:        "org.matsim.core.mobsim.qsim.PopulationModule"
+QSimProvider$1:          "org.matsim.core.mobsim.qsim.QSimProvider$1"
+QVehicleFactory:         "org.matsim.core.mobsim.qsim.qnetsimengine.QVehicleFactory"
+TransitEngineModule:     "org.matsim.core.mobsim.qsim.pt.TransitEngineModule"
+TransitStopAgentTracker: "org.matsim.core.mobsim.qsim.pt.TransitStopAgentTracker"
+========================
+End of classname legend:
+========================
+
+	at com.google.inject.internal.InternalProvisionException.toProvisionException(InternalProvisionException.java:251) ~[guice-7.0.0.jar:?]
+	at com.google.inject.internal.InjectorImpl$1.get(InjectorImpl.java:1151) ~[guice-7.0.0.jar:?]
+	at org.matsim.core.controler.NewControler.runMobSim(NewControler.java:125) ~[matsim-2024.0.jar:?]
+	at org.matsim.core.controler.AbstractController$8.run(AbstractController.java:214) ~[matsim-2024.0.jar:?]
+	at org.matsim.core.controler.AbstractController.iterationStep(AbstractController.java:246) ~[matsim-2024.0.jar:?]
+	at org.matsim.core.controler.AbstractController.mobsim(AbstractController.java:210) ~[matsim-2024.0.jar:?]
+	at org.matsim.core.controler.AbstractController.iteration(AbstractController.java:157) ~[matsim-2024.0.jar:?]
+	at org.matsim.core.controler.AbstractController.doIterations(AbstractController.java:124) ~[matsim-2024.0.jar:?]
+	at org.matsim.core.controler.AbstractController$1.run(AbstractController.java:84) ~[matsim-2024.0.jar:?]
+	at org.matsim.core.controler.MatsimRuntimeModifications.run(MatsimRuntimeModifications.java:70) [matsim-2024.0.jar:?]
+	at org.matsim.core.controler.MatsimRuntimeModifications.run(MatsimRuntimeModifications.java:53) [matsim-2024.0.jar:?]
+	at org.matsim.core.controler.AbstractController.run(AbstractController.java:92) [matsim-2024.0.jar:?]
+	at org.matsim.core.controler.NewControler.run(NewControler.java:83) [matsim-2024.0.jar:?]
+	at org.matsim.core.controler.Controler.run(Controler.java:259) [matsim-2024.0.jar:?]
+	at org.matsim.project.RunMatsim.main(RunMatsim.java:46) [classes/:?]
+2024-12-19T02:44:17,702 ERROR MatsimRuntimeModifications:100 ERROR --- MATSim unexpectedly terminated. Please check the output or the logfile with warnings and errors for hints.
+2024-12-19T02:44:17,702 ERROR MatsimRuntimeModifications:101 ERROR --- results should not be used for further analysis.
+2024-12-19T02:44:17,702 ERROR MatsimRuntimeModifications:105 ERROR --- This was an unexpected shutdown! See the log file for a possible reason.
