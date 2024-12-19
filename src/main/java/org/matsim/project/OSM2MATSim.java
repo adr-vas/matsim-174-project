@@ -60,7 +60,7 @@ public class OSM2MATSim {
 
                     double originalLength = link.getLength();
                     if (originalLength < 100) {
-                        link.setLength(originalLength * 25); // Increase length by 850%
+                        link.setLength(originalLength * 25); // Increase length by 2500%
                     } else {
                         link.setLength(originalLength * 8.5); // Increase length by 850%
                     }
