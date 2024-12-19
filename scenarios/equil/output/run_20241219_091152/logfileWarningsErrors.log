@@ -1,2 +1,0 @@
-2024-12-19T09:12:04,833  WARN ConfigConsistencyCheckerImpl:167 Using lanes without enabling linktolinkrouting might not lead to expected simulation results
-2024-12-19T09:12:07,106  WARN RandomizingTimeDistanceTravelDisutilityFactory:118 There will be no routing randomness. The randomization of the travel disutility requires the travel time cost rate to be different than zero. Continuing anyway.

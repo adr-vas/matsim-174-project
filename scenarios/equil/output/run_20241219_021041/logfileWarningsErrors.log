@@ -1,9 +1,0 @@
-2024-12-19T02:10:44,082  WARN ConfigConsistencyCheckerImpl:167 Using lanes without enabling linktolinkrouting might not lead to expected simulation results
-2024-12-19T02:10:44,450  WARN RandomizingTimeDistanceTravelDisutilityFactory:118 There will be no routing randomness. The randomization of the travel disutility requires the travel time cost rate to be different than zero. Continuing anyway.
-2024-12-19T02:10:45,463  WARN CharyparNagelActivityScoring:247 The first and the last activity do not have the same type. 
-2024-12-19T02:10:45,463  WARN CharyparNagelActivityScoring:248 Will score the first activity from midnight to its end, and the last activity from its start to midnight.
-2024-12-19T02:10:45,463  WARN CharyparNagelActivityScoring:249 Because of the nonlinear function, this is not the same as scoring from start to end.
-2024-12-19T02:10:45,467  WARN CharyparNagelActivityScoring:250 first activity: act [type=home][coord=null][linkId=341287120005f][startTime=undefined][endTime=08:00:00][duration=undefined][facilityId=null]
-2024-12-19T02:10:45,468  WARN CharyparNagelActivityScoring:251 last activity: act [type=work][coord=null][linkId=341287120005f][startTime=08:00:00][endTime=undefined][duration=undefined][facilityId=null]
-2024-12-19T02:10:45,468  WARN CharyparNagelActivityScoring:252 This may also happen when plans are not completed when the simulation ends.
-2024-12-19T02:10:45,468  WARN CharyparNagelActivityScoring:254 Additional warnings of this type are suppressed.

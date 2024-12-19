@@ -1,4 +1,0 @@
-2024-12-19T07:50:38,387  WARN ConfigConsistencyCheckerImpl:167 Using lanes without enabling linktolinkrouting might not lead to expected simulation results
-2024-12-19T07:50:38,719  WARN RandomizingTimeDistanceTravelDisutilityFactory:118 There will be no routing randomness. The randomization of the travel disutility requires the travel time cost rate to be different than zero. Continuing anyway.
-2024-12-19T07:50:43,504 ERROR BasicPlanAgentImpl:187 last activity of person driver agent id car_128.02_401_10 has end time < infty; setting it to infty
-2024-12-19T07:50:43,505 ERROR BasicPlanAgentImpl:188  This message given only once.
